@@ -28,7 +28,9 @@ def process(input_image, prompt, a_prompt, n_prompt, num_samples, image_resoluti
     result = cv2.VideoWriter(result_path, cv2.VideoWriter_fourcc(*'MP4V'), 24, (896, 512))
 
     with torch.no_grad():
-        for infile in glob.glob(infile_dir):
+        list_dir = glob.glob(infile_dir)
+        list_dir.sort()
+        for infile in list_dir:
             input_image = cv2.imread(infile)
 
             img = resize_image(HWC3(input_image), image_resolution)
